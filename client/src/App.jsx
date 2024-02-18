@@ -1,5 +1,6 @@
 import { Outlet, Navigate,Route,Routes,useLocation } from "react-router-dom"
 import { Footer, Navbar } from "./components"
+import { About, Auth, Companies, CompanyProfile, FindJobs, JobDetail, UploadJob, UserProfile } from "./pages";
 
 
 
@@ -10,14 +11,15 @@ function Layout (){
 
    return user? (
     <Outlet/>
-   ) : (<Navigate to='user-auth' state={{from:location}} replace />)
+   ) : (<Navigate to="/user-auth" state={{from:location}} replace />)
 }
 
 
 function App() {
-  
-
+ 
+const user=true
   return (
+   
     <main>
       <Navbar />
       <Routes>
@@ -35,7 +37,7 @@ function App() {
        </Route>
 
        <Route path="/about-us"  element={<About/>} />
-       <Route path="/user-auth "  element={<AuthPage />}/>
+       <Route path="/user-auth"  element={<Auth />}/>
       </Routes>
 
     { user && <Footer />}
