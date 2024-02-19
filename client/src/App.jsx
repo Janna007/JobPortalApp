@@ -6,7 +6,7 @@ import { About, Auth, Companies, CompanyProfile, FindJobs, JobDetail, UploadJob,
 
 
 function Layout (){
-   const user=true;
+   const user={};
    const location=useLocation()
 
    return user? (
@@ -17,7 +17,7 @@ function Layout (){
 
 function App() {
  
-const user=true
+const user={}
   return (
    
     <main>
