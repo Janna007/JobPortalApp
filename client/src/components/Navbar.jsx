@@ -102,21 +102,21 @@ function Navbar() {
       <nav className='container mx-auto flex items-center justify-between py-5'>
           <div>
             <Link to='/'  className='text-blue-600  font-bold  text-xl'>
-              JOB<span className='text-[#1677cccb]'>Portal</span>
+              TERILLA<span className='text-[#1677cccb]'>:jobconnect</span>
              </Link>
           </div>
           <ul className='hidden lg:flex gap-10 text-base'>
             <li>
-              <Link to='/find-jobs'>Search Job</Link>
+              <Link to='/find-jobs'>SEARCH JOB</Link>
             </li>
             <li>
-              <Link to='/companies'>Companies</Link>
+              <Link to='/companies'>COMPANIES</Link>
             </li>
             <li>
-              <Link to='/upload-job'>upload job</Link>
+              <Link to='/upload-job'>UPLOAD JOB</Link>
             </li>
             <li>
-              <Link to='/about-us'>About</Link>
+              <Link to='/about-us'>ABOUT</Link>
             </li>
           </ul>
 
