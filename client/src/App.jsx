@@ -1,13 +1,15 @@
 import { Outlet, Navigate,Route,Routes,useLocation } from "react-router-dom"
 import { Footer, Navbar } from "./components"
 import { About, Auth, Companies, CompanyProfile, FindJobs, JobDetail, UploadJob, UserProfile } from "./pages";
+import { useSelector } from "react-redux";
 
 
 
 
 function Layout (){
-   const user={};
+   const {user}=useSelector((state)=>state.user);
    const location=useLocation()
+   
 
    return user? (
     <Outlet/>
@@ -17,7 +19,7 @@ function Layout (){
 
 function App() {
  
-const user={}
+  const {user}=useSelector((state)=>state.user);
   return (
    
     <main>
