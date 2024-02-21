@@ -8,6 +8,7 @@ import JobCard from "./JobCard";
 import Header from './Header'
 import CompanyCard from "./CompanyCard";
 import Loading from './Loading'
+import JobTypes from "./JobTypes";
 
 export {Navbar,Footer,CustomButton,TextInput,SignUp,ListBox,JobCard,
-Header,CompanyCard,Loading}; 
+Header,CompanyCard,Loading ,JobTypes}; 

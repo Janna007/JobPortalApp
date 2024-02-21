@@ -12,7 +12,7 @@ function Layout (){
    const location=useLocation()
    
 
-   return user? (
+   return user?.token? (
     <Outlet/>
    ) : (<Navigate to="/user-auth" state={{from:location}} replace />)
 }
@@ -31,7 +31,7 @@ function App() {
         <Route  path="/" element={<Navigate to='/find-jobs'  replace={true} />} />
         <Route  path="/find-jobs"  element={<FindJobs />} />
         <Route  path="/companies"  element={<Companies />} />
-        <Route  path= {user?.user?.accountType==="seeker" ?"/user-profile" :"user-profile/:id"}
+        <Route  path= {user?.accountType==="seeker" ?"/user-profile" :"user-profile/:id"}
            element={<UserProfile/>} />
 
           <Route path={"/company-profile"} element={<CompanyProfile />} />
