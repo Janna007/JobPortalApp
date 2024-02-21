@@ -7,7 +7,7 @@ import { BsCheck2, BsChevronExpand } from "react-icons/bs";
 const options = ["Newest", "Oldest", "A-Z", "Z-A"];
 function ListBox({sort, setSort}) {
   return (
-    <div className='w-[8rem] md:w-[10rem]'>
+    <div className='w-[8rem] md:w-[10rem]'> 
       <Listbox value={sort} onChange={setSort}>
         <div className='relative mt-1'>
           <Listbox.Button

@@ -2,7 +2,10 @@ import React from 'react'
 
 function UploadJob() {
   return (
-    <div>UploadJob</div>
+    <div>
+
+      
+    </div>
   )
 }
 
