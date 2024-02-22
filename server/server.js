@@ -6,6 +6,8 @@ import bodyParser from 'body-parser'
 import xss from 'xss-clean'
 import mongosanitize from 'express-mongo-sanitize'
 import connectDB from './db/dbconnection.js'
+import router from './routes/index.js'
+import errorMiddleware from './middlewares/errorMiddleware.js'
 
 
 dotenv.config()
@@ -27,6 +29,9 @@ app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true }));
 
 app.use(morgan("dev"));
+
+app.use(router)
+app.use(errorMiddleware)
 
 
 app.listen(PORT,()=>{
