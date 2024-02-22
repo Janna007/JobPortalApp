@@ -47,6 +47,6 @@ const jobSchema= new Schema({
     ]
        
 
-})
+},{timestamps:true})
 
 export const Jobs=mongoose.model("Jobs",jobSchema)

@@ -38,7 +38,7 @@ const companySchema=new Schema({
         type:Schema.Types.ObjectId,
         ref:"Jobs"
     }]
-})
+},{timestamps:true})
 
 
 //password should be encrypted before save the document in database
