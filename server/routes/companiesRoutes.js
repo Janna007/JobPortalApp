@@ -1,6 +1,6 @@
 import express from "express";
 import { rateLimit } from "express-rate-limit";
-import { register, signIn, updateCompanyProfile } from "../controllers/companiesController.js";
+import { getCompanies, getCompanyById, getCompanyJobListing, getCompanyProfile, register, signIn, updateCompanyProfile } from "../controllers/companiesController.js";
 import userAuth from "../middlewares/authMiddleware.js";
 
 
@@ -17,5 +17,11 @@ const limiter = rateLimit({
   router.post("/signIn",signIn)
 
   router.put("/update-company", userAuth, updateCompanyProfile);
+  router.post("/get-company-profile", userAuth, getCompanyProfile);
+
+   router.post("/get-company-joblisting", userAuth, getCompanyJobListing);
+   router.get("/", getCompanies);
+   router.get("/get-company/:id", getCompanyById);
+
 
   export default router

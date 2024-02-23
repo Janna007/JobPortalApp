@@ -130,5 +130,177 @@ export const updateCompanyProfile=async(req,res,next)=>{
 }
 
 export const getCompanyProfile =async(req,res,next)=>{
-       const id=req.body.user.userId
+  try {
+    const id=req.body.user.userId
+    
+    if(!isValidObjectId(id)){
+     next("unauthorised access")
+     return
+    }
+
+   const company=await Companies.findById(id).select("-password")
+
+    if(!company){
+      next("not user found ")
+      return
+    }
+
+    res.status(200).send({
+      success: true,
+      data: company
+    })
+
+  } catch (error) {
+    console.log(error)
+    res.status(404).json({messege:error.messege})
+  }
+
+
+}
+
+export const getCompanies =async(req,res,next)=>{
+    try {
+      const {search,sort,location}=req.query
+
+      //searching
+
+      const queryObject={}
+      if(search){
+        queryObject.name={$regex:search,$options:"i"}
+      }
+
+      if(location){
+        queryObject.location={$regex:location,$options:"i"}
+      }
+
+      const queryResult= await Companies.find(queryObject).select("-password")
+
+      //sorting
+
+      if(sort==="Newest"){
+       queryResult= queryResult.sort("-createdAt")
+      }
+
+      if(sort==="Oldest"){
+        queryResult=queryResult.sort("createdAt")
+      }
+
+      if(sort==="A-Z"){
+        queryResult=queryResult.sort("name")
+      }
+      if(sort==="Z-A"){
+        queryResult=queryResult.sort("-name")
+      }
+      
+      //pagination
+      const page=Number(req.query.page)
+      const limit=Number(req.query.limit)
+      
+      const skip=(page-1)*limit
+
+      const total=await Companies.countDocuments(queryResult)
+
+      const numPage=Math.ceil(total/limit)
+      
+      // queryResult=queryResult.skip(skip).limit(limit)
+
+      queryResult=queryResult.limit(limit*page)
+
+      const companies = await queryResult;
+
+      res.status(200)
+      .send({
+        success:true,
+        total,
+        numPage,
+        data:companies,
+        page
+      })
+
+
+
+    } catch (error) {
+       console.log(error)
+       res.status(404).json({messege:error.messege})
+    }
+}
+
+export const getCompanyJobListing =async(req,res,next)=>{
+        const { search, sort } = req.query;
+        const id = req.body.user.userId;
+
+        try {
+             
+       const queryObject = {};
+
+         if (search) {
+           queryObject.location = { $regex: search, $options: "i" };
+          }
+
+          let sorting;
+          //sorting || another way
+          if (sort === "Newest") {
+            sorting = "-createdAt";
+          }
+          if (sort === "Oldest") {
+            sorting = "createdAt";
+          }
+          if (sort === "A-Z") {
+            sorting = "name";
+          }
+          if (sort === "Z-A") {
+            sorting = "-name";
+          }
+
+          let queryResult = await Companies.findById(id).populate({
+            path: "jobPosts",
+            options: { sort: sorting },
+          });
+          const companies = await queryResult;
+      
+          res.status(200).json({
+            success: true,
+            companies,
+          })
+          
+        } catch (error) {
+          console.log(error);
+    res.status(404).json({ message: error.message });
+        }
+}
+
+export const getCompanyById =async(req,res,next)=>{
+  try {
+    const {id}=req.params
+    
+    if(!isValidObjectId(id)){
+      next("invalid access")
+      return
+    }
+
+    const company=await Companies.findById(id).populate({
+      path:"jobPosts",
+      options:{
+        sort:"-_id"
+      }
+    }).select("-password")
+
+    if(!company){
+      next("company not found")
+      return
+    }
+
+    res.status(200)
+    .send({
+      success:true,
+      company
+    })
+
+
+
+    
+  } catch (error) {
+    console.log(error);
+    res.status(404).json({ message: error.message });
+  }
 }
