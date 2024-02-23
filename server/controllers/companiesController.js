@@ -160,59 +160,62 @@ export const getCompanyProfile =async(req,res,next)=>{
 
 export const getCompanies =async(req,res,next)=>{
     try {
-      const {search,sort,location}=req.query
+      const { search, sort, location } = req.query;
 
-      //searching
+      //searching 
 
       const queryObject={}
-      if(search){
-        queryObject.name={$regex:search,$options:"i"}
-      }
 
-      if(location){
-        queryObject.location={$regex:location,$options:"i"}
-      }
+     
+    if (search) {
+      queryObject.name = { $regex: search, $options: "i" };
+    }
 
-      const queryResult= await Companies.find(queryObject).select("-password")
+    if (location) {
+      queryObject.location = { $regex: location, $options: "i" };
+    }
+
+      let queryResult= Companies.find(queryObject).select("-password")
+      
 
       //sorting
 
-      if(sort==="Newest"){
-       queryResult= queryResult.sort("-createdAt")
+      if (sort === "Newest") {
+        queryResult = queryResult.sort("-createdAt");
       }
-
-      if(sort==="Oldest"){
-        queryResult=queryResult.sort("createdAt")
+      if (sort === "Oldest") {
+        queryResult = queryResult.sort("createdAt");
       }
-
-      if(sort==="A-Z"){
-        queryResult=queryResult.sort("name")
+      if (sort === "A-Z") {
+        queryResult = queryResult.sort("name");
       }
-      if(sort==="Z-A"){
-        queryResult=queryResult.sort("-name")
+      if (sort === "Z-A") {
+        queryResult = queryResult.sort("-name");
       }
       
       //pagination
-      const page=Number(req.query.page)
-      const limit=Number(req.query.limit)
+      const page=Number(req.query.page) ||1
+      const limit=Number(req.query.limit)||20
+      
       
       const skip=(page-1)*limit
 
-      const total=await Companies.countDocuments(queryResult)
-
-      const numPage=Math.ceil(total/limit)
+      const total = await Companies.countDocuments(queryResult);
+      const numOfPage = Math.ceil(total / limit);
+  
       
       // queryResult=queryResult.skip(skip).limit(limit)
 
-      queryResult=queryResult.limit(limit*page)
+      queryResult = queryResult.limit(limit * page);
 
       const companies = await queryResult;
+     
 
       res.status(200)
       .send({
         success:true,
         total,
-        numPage,
+        numOfPage,
         data:companies,
         page
       })
