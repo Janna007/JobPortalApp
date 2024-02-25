@@ -17,7 +17,7 @@ const limiter = rateLimit({
   router.post("/login",signIn)
 
   router.put("/update-company", userAuth, updateCompanyProfile);
-  router.post("/get-company-profile", userAuth, getCompanyProfile);
+   router.post("/get-company-profile", userAuth, getCompanyProfile);
 
    router.post("/get-company-joblisting", userAuth, getCompanyJobListing);
    router.get("/", getCompanies);

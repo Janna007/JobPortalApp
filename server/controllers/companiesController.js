@@ -107,6 +107,7 @@ export const updateCompanyProfile=async(req,res,next)=>{
                 contact,
                 about,
                 location,
+                profileUrl
             }
         },
         {new:true})
@@ -151,7 +152,7 @@ export const getCompanyProfile =async(req,res,next)=>{
 
     res.status(200).send({
       success: true,
-      data: company
+      data: company,
     })
 
   } catch (error) {
@@ -300,7 +301,7 @@ export const getCompanyById =async(req,res,next)=>{
     res.status(200)
     .send({
       success:true,
-      company
+       data:company
     })
 
 
