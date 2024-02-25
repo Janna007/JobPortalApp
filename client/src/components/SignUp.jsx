@@ -5,6 +5,8 @@ import { useLocation } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import TextInput from './TextInput'
 import CustomButton from './CustomButton'
+import { Login } from '../redux/userSlice.js'
+import { apiRequest } from '../utils'
 
 function SignUp({open,SetOpen}) {
     const dispatch=useDispatch()
@@ -17,9 +19,45 @@ function SignUp({open,SetOpen}) {
     let from =location.state?.from?.pathname || "/"
 
     const closeModal=()=> SetOpen(false)
-    const onSubmit=()=>{
+
+
+    const onSubmit=async (data)=>{
+         let URL=null
+
+        if(isRegister){
+            if(accountType==="seeker"){
+              URL="auth/register"
+            }else{
+              URL="companies/register"
+            }
+         }else{
+          if(accountType==="seeker"){
+            URL="auth/login"
+          }else{
+            URL="companies/login"
+          }
+         }
+
+      try {
+        const res= await apiRequest({url :URL,data:data,method:"POST"})
+        
+        if(res?.status==="failed"){
+          setErrMsg(res?.message)
+        }else{
+          setErrMsg("")
+         const data={token:res?.token,...res?.user}
+        
+         dispatch(Login(data))
          
-    }
+          localStorage.setItem("userInfo",JSON.stringify(data))
+          window.location.replace(from)
+      }
+      } catch (error) {
+        console.log(error)
+      }
+      }
+
+      
     
   return (
     <>
@@ -50,6 +88,7 @@ function SignUp({open,SetOpen}) {
                 leaveTo='opacity-0 scale-95'
               >
                 <Dialog.Panel className='w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all '>
+
                   <Dialog.Title
                     as='h3'
                     className='text-xl font-semibold lwading-6 text-gray-900'
@@ -231,7 +270,10 @@ function SignUp({open,SetOpen}) {
                       </span>
                     </p>
                   </div>
+
                 </Dialog.Panel>
+
+
               </Transition.Child>
             </div>
           </div>

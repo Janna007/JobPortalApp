@@ -6,16 +6,24 @@ import { HiMenuAlt3 } from "react-icons/hi";
 import { AiOutlineClose, AiOutlineLogout } from "react-icons/ai";
 import {Link} from "react-router-dom"
 import CustomButton from './CustomButton';
-import { users } from '../utils/data';
+
+import { useDispatch,useSelector } from 'react-redux';
+import { Logout } from '../redux/userSlice.js';
 
 function MenuList({user,onClick}){
+
+  const dispatch=useDispatch()
+  const handleLogout=()=>{
+    dispatch(Logout())
+    window.location.replace("/")
+  }
    return(
     <div>
       <Menu as='div' className='inline-block text-left'>
           <div className='flex'>
             <Menu.Button  className='inline-flex gap-2 w-full rounded-md bg-white md:px-4 py-2 text-sm font-medium text-slate-700 hover:bg-opacity-20 '>
               <div className='leading[80px] flex flex-col items-start'>
-               <p className='text-sm font-semibold'>{user?.firstName  ??  user?.name}</p>
+               <p className='text-sm font-semibold'>   {user?.firstName ?? user?.name }</p>
                <span className='text-sm text-blue-600'>{user?.jobTitle  ?? user?.email}</span>
               </div>
 
@@ -90,7 +98,9 @@ function MenuList({user,onClick}){
 
 function Navbar() {
 
-  const user=users[1]
+  const {user}=useSelector((state)=>state.user)
+  console.log(user)
+  
   const[isOpen,setIsOpen]=useState(false)
   
 
@@ -132,7 +142,7 @@ function Navbar() {
                   <MenuList user={user}/>
                  </div>
               )
-            }
+            } 
           </div>
           <button
             className='block lg:hidden text-slate-900'

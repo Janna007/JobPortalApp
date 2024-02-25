@@ -82,7 +82,7 @@ export const signIn=async(req,res,next)=>{
       .send({
         success:true,
         messege:"loggined successfully",
-        user,
+        user:user,
         token
       })
 

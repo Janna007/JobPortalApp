@@ -14,7 +14,7 @@ const limiter = rateLimit({
 
   const router=express.Router()
   router.post("/register",limiter,register)
-  router.post("/signIn",signIn)
+  router.post("/login",signIn)
 
   router.put("/update-company", userAuth, updateCompanyProfile);
   router.post("/get-company-profile", userAuth, getCompanyProfile);

@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 
 function Layout (){
    const {user}=useSelector((state)=>state.user);
+
  
    const location=useLocation()
    
@@ -21,6 +22,7 @@ function Layout (){
 function App() {
  
   const {user}=useSelector((state)=>state.user);
+ 
  
   return (
    

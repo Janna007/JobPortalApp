@@ -34,7 +34,11 @@ export const register=async(req,res,next)=>{
        .send({
         success:true,
         messege:"Account created for company succesfully",
-        company,
+        user: {
+          _id: company._id,
+          name: company.name,
+          email: company.email,
+        },
         token
       })        
     } catch (error) {
@@ -71,7 +75,7 @@ export const signIn=async(req,res,next)=>{
     res.status(200).send({
         success:true,
         messege:"loggined succesfully",
-        company,
+        user:company,
         token
     })
 
