@@ -99,7 +99,7 @@ function MenuList({user,onClick}){
 function Navbar() {
 
   const {user}=useSelector((state)=>state.user)
-  console.log(user)
+  
   
   const[isOpen,setIsOpen]=useState(false)
   
@@ -134,7 +134,8 @@ function Navbar() {
             {
              ! user?.token ?(
                 <Link to='/user-auth'>
-                  <CustomButton title='SignIn' 
+                  <CustomButton title='SignIn'
+                  
                   containerStyles='text-blue-600 border border-blue-600 rounded-full py-1.5 px-5 text-base   hover:bg-blue-700 hover:text-white  focus:outline-none'  />
                 </Link>
               ):(

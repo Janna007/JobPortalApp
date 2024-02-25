@@ -227,7 +227,7 @@ export const getJobPosts =async(req,res,next)=>{
     res.status(404).json({ message: error.message });
     }
 
-}
+} 
 
 export const getJobById =async(req,res,next)=>{
    try {
