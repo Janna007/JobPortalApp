@@ -5,19 +5,19 @@ import CustomButton from './CustomButton'
 import { popularSearch } from "../utils/data";
 import { HeroImage } from '../assets';
 
-function SearchInput({
+const SearchInput=({
     placeholder,
     icon,
     value,
     setValue,
     styles
-} ){
+} )=>{
 
-     const handleChange=(e)=>{
+         const handleChange=(e)=>{
          setValue(e.target.value)
        }
 
-       const clearInput=()=>  setValue("")
+       const clearInput=()=> { setValue("")}
        
 
 
@@ -27,7 +27,7 @@ function SearchInput({
 
       <input
          value={value}
-         onChange={(e)=>{handleChange(e)}}
+         onChange={(e) => handleChange(e)}
          type='text'
          placeholder={placeholder}
          className='w-full md:w-64 p-2 outline-none bg-transparent text-base'
@@ -45,12 +45,12 @@ function SearchInput({
 
 
 function Header({
-    title,
+    title, 
     type,
     searchQuery,
-    setsearchQuery,
+    setSearchQuery,
     location,
-    setLoaction,
+    setLocation,
     handleClick
 }) {
   return (
@@ -67,15 +67,16 @@ function Header({
                     <SearchInput
                        placeholder="Enter Your Keyword.."
                        icon={<AiOutlineSearch className='text-gray-600 text-xl' />}
+    
                        value={searchQuery}
-                       setValue={setsearchQuery}
+                       setValue={setSearchQuery}
                     
                     />
                     <SearchInput
                        placeholder="Enter Location"
                        icon={< CiLocationOn className='text-gray-600 text-xl' />}
                        value={location}
-                       setValue={setLoaction}
+                       setValue={setLocation}
                        styles={"hidden md:flex"}
                     />
 

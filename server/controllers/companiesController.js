@@ -153,7 +153,7 @@ export const getCompanyProfile =async(req,res,next)=>{
     res.status(200).send({
       success: true,
       data: company,
-    })
+    }) 
 
   } catch (error) {
     console.log(error)
