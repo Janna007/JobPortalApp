@@ -241,7 +241,7 @@ export const getJobById =async(req,res,next)=>{
     const job= await Jobs.findById(id).populate({
         path:"company",
         select: "-password",
-    })
+    }) 
 
     if(!job){
         return res.status(200).send({
@@ -292,7 +292,7 @@ export const deleteJobPost =async(req,res,next)=>{
     
         res.status(200).send({
           success: true,
-          messsage: "Job Post Delted Successfully.",
+          message: "Job Post Deleted Successfully.",
         });
       } catch (error) {
         console.log(error);

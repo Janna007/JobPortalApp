@@ -5,16 +5,63 @@ import { AiOutlineSafetyCertificate } from "react-icons/ai";
 import {useParams} from'react-router-dom'
 import {jobs} from '../utils/data'
 import { CustomButton, JobCard } from "../components";
+import { useSelector } from 'react-redux';
+import { apiRequest } from '../utils';
 
 function JobDetail() {
-  const params = useParams();
-  
-  const id = parseInt(params.id) - 1;
-  const [job, setJob] = useState(jobs[0]);
-  const [selected, setSelected] = useState("0");
+  const {id} = useParams();
+  const {user}=useSelector((state)=>state.user)
 
+  const [similarJob,setSimilarJob]=useState([])
+  const [job, setJob] = useState(null);
+  const [selected, setSelected] = useState("0");
+  const[isFetching,setIsFetching]=useState(false)
+
+  const fetchJobDetails=async ()=>{
+       setIsFetching(true)
+       try {
+        const res=await apiRequest({
+         url:"/jobs//get-job-detail/"+id,
+      
+         method:"GET",
+        })
+        console.log(res)
+        setJob(res?.data)
+        setSimilarJob(res?.similarJobs)
+        setIsFetching(false)
+       
+       } catch (error) {
+         console.log(error)
+         setIsFetching(false)
+       }
+  }
+   const handleDeletePost=async ()=>{
+      setIsFetching(true)
+        try {
+          if(window.confirm("Delete job post?")){
+          const res=await apiRequest(
+           { url:"/jobs/delete-job/"+job?._id,
+            token:user?.token,
+           
+            method:"DELETE"}
+          )
+        
+          console.log(res)
+        if(res?.success){
+          alert(res?.message)
+          window.location.replace("/")
+        }
+        
+        }
+        setIsFetching(false)
+        } catch (error) {
+          setIsFetching(false)
+           console.log(error)
+        }
+
+   }
   useEffect(() => {
-    setJob(jobs[id ?? 0]);
+     id && fetchJobDetails()
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   }, [id]);
 
@@ -78,7 +125,7 @@ function JobDetail() {
             <div className='bg-[#cecdff] w-40 h-16 px-6 rounded-lg flex flex-col items-center justify-center'>
               <span className='text-sm'>No. of Vacancies</span>
               <p className='text-lg font-semibold text-gray-700'>
-                {job?.vacancies}
+                {job?.vaccancy}
               </p>
             </div>
           </div>
@@ -112,11 +159,11 @@ function JobDetail() {
 
                 <span className='text-base'>{job?.detail[0]?.desc}</span>
 
-                {job?.detail[0]?.requirement && (
+                {job?.detail[0]?.requirements && (
                   <>
                     <p className='text-xl font-semibold mt-8'>Requirement</p>
                     <span className='text-base'>
-                      {job?.detail[0]?.requirement}
+                      {job?.detail[0]?.requirements}
                     </span>
                   </>
                 )}
@@ -136,13 +183,19 @@ function JobDetail() {
               </>
             )}
           </div>
-
+      
           <div className='w-full'>
+           {user?._id !== job?.company?._id ?
             <CustomButton
               title='Apply Now'
               containerStyles={`w-full flex items-center justify-center text-white bg-black py-3 px-5 outline-none rounded-full text-base`}
-            />
-          </div>
+            />   : <CustomButton
+            title='Delete Job Post'
+            onClick={handleDeletePost}
+            containerStyles={`w-full flex items-center justify-center text-white bg-black py-3 px-5 outline-none rounded-full text-base`}
+          />
+            }
+          </div> 
         </div>
 {/* RIGHT SIDE */}
 
@@ -151,9 +204,14 @@ function JobDetail() {
   <div className=' w-full flex flex-wrap gap-3'>
 
   {
-    jobs.slice(0,6).map((job,index)=>(
-        <JobCard  job={job}   index={index}/>
-    ))
+    similarJob.slice(0,6).map((job,index)=>{
+        const data={
+          name:job?.company?.name,
+          logo:job?.company?.profileUrl,
+          ...job,
+        }
+        return <JobCard  job={data}   index={index}/>
+       } )
   }
   </div>
   

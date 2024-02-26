@@ -129,11 +129,11 @@ function UploadJob() {
             <div className='w-full flex gap-4'>
               <div className='w-1/2'>
                 <TextInput
-                  name='vacancies'
+                  name='vaccancy'
                   label='No. of Vacancies'
                   placeholder='vacancies'
                   type='number'
-                  register={register("vacancies", {
+                  register={register("vaccancy", {
                     required: "Vacancies is required!",
                   })}
                   error={errors.vacancies ? errors.vacancies?.message : ""}
