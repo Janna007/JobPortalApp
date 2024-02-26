@@ -9,6 +9,7 @@ import CustomButton from './CustomButton';
 
 import { useDispatch,useSelector } from 'react-redux';
 import { Logout } from '../redux/userSlice.js';
+import { NoProfile } from '../assets/index.js';
 
 function MenuList({user,onClick}){
 
@@ -27,7 +28,7 @@ function MenuList({user,onClick}){
                <span className='text-sm text-blue-600'>{user?.jobTitle  ?? user?.email}</span>
               </div>
 
-              <img  src={user?.profileUrl}  alt='Profile' 
+              <img  src={user?.profileUrl || NoProfile}  alt='Profile' 
                className='w-10 h-10 rounded-full object-cover'/>
 
              <BiChevronDown
@@ -122,9 +123,15 @@ function Navbar() {
             <li>
               <Link to='/companies'>COMPANIES</Link>
             </li>
-            <li>
+             {(user?.accountType!=="seeker") ?     
+              <li>
               <Link to='/upload-job'>UPLOAD JOB</Link>
             </li>
+            :  <li>
+            <Link to='/upload-job'>APPLY JOB</Link>
+          </li>
+          
+             }
             <li>
               <Link to='/about-us'>ABOUT</Link>
             </li>

@@ -52,7 +52,7 @@ export const updateURL=({
       location,
       jType,
       exp
-})=>{
+})=>{ 
     const params=new URLSearchParams()
     if(pageNum && pageNum>1){
         params.set("page",pageNum)

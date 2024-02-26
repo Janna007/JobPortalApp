@@ -6,6 +6,9 @@ import { HiLocationMarker } from "react-icons/hi";
 import { AiOutlineMail } from "react-icons/ai";
 import { FiPhoneCall } from "react-icons/fi";
 import { CustomButton, TextInput } from "../components";
+import { NoProfile } from "../assets";
+import { apiRequest, handleFileUpload } from "../utils";
+import { Login } from "../redux/userSlice";
 
 const UserForm = ({ open, setOpen }) => {
   const { user } = useSelector((state) => state.user);
@@ -17,13 +20,45 @@ const UserForm = ({ open, setOpen }) => {
     formState: { errors },
   } = useForm({
     mode: "onChange",
-    defaultValues: { ...user?.user },
+    defaultValues: { ...user},
   });
   const dispatch = useDispatch();
   const [profileImage, setProfileImage] = useState("");
   const [uploadCv, setUploadCv] = useState("");
+  const [isLoading,setIsLoading]=useState(false)
+ 
 
-  const onSubmit = async (data) => {};
+  const onSubmit = async (data) => {
+        setIsLoading(true)
+         try {
+          const uri= profileImage &&( await(handleFileUpload(profileImage)))
+          // const resumeURI=uploadCv &&( await(handleFileUpload(uploadCv)))
+
+          const newData=uri ? {...data,profileUrl:uri} :data
+
+          const res=await apiRequest({
+            url:"/users/update-user",
+            data:newData,
+            token:user?.token,
+            method:"PUT"
+          })
+         
+        
+         if(res)
+        {
+            const newData={token:res?.token,...res?.user}
+            dispatch(Login(newData))
+            localStorage.setItem("userInfo",JSON.stringify(data))
+
+            window.location.reload()
+        }
+
+          
+         } catch (error) {
+           console.log(error)
+           setIsLoading(false)
+         }
+  };
 
   const closeModal = () => setOpen(false);
 
@@ -243,7 +278,7 @@ const UserProfile = () => {
 
             <div className='w-full md:w-1/3 h-44'>
               <img
-                src={userInfo?.profileUrl}
+                src={userInfo?.profileUrl || NoProfile} 
                 alt={userInfo?.firstName}
                 className='w-full h-48 object-contain rounded-lg'
               />
@@ -254,8 +289,13 @@ const UserProfile = () => {
                 Edit Profile
               </button>
             </div>
+        
           </div>
+          {/* <div>
+              <button className='w-full md:w-64 bg-blue-600 text-white mt-4 py-2 rounded'>GET premium</button>
+            </div> */}
         </div>
+        
       </div>
 
       <UserForm open={open} setOpen={setOpen} />

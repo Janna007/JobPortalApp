@@ -202,7 +202,7 @@ export const getJobPosts =async(req,res,next)=>{
           }
       // pagination
       const page = Number(req.query.page) || 1;
-      const limit = Number(req.query.limit) || 20;
+      const limit = Number(req.query.limit) || 4;
       const skip = (page - 1) * limit;
     
       //records count
@@ -250,7 +250,7 @@ export const getJobById =async(req,res,next)=>{
           });
     }
 
-    //similar jobs
+    //similar jobs 
 
 
     const searchQuery={

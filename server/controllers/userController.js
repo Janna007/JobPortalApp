@@ -16,7 +16,7 @@ export const userUpdateProfile=async(req,res,next)=>{
       } = req.body;
 
     try {
-        if (!firstName || !lastName || !email || !contact || !jobTitle || !about) {
+        if (!firstName || !lastName  || !contact || !jobTitle || !about) {
             next("Please provide all required fields");
         }
 
@@ -33,7 +33,9 @@ export const userUpdateProfile=async(req,res,next)=>{
                   email,
                   contact,
                   jobTitle,
-                  about
+                  about,
+                  profileUrl,
+                  location
               }},
               {new:true}
             )

@@ -56,7 +56,10 @@ function Companies()  {
 
          await fetchCompanies()
   }
-  const handleShowMore=()=>{}
+  const handleShowMore=async (e)=>{
+       e.preventDefault()
+       setPage((prev)=>prev+1)
+  }
 
   useEffect(()=>{
     fetchCompanies()

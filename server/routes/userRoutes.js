@@ -5,6 +5,6 @@ import { getUser, userUpdateProfile } from '../controllers/userController.js'
   const router=express.Router()
   router.post("/get-user",userAuth,getUser)
 
-  router.put("/update-users",userAuth,userUpdateProfile)
+  router.put("/update-user",userAuth,userUpdateProfile)
   
   export default router
