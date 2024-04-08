@@ -23,6 +23,7 @@ function SignUp({open,SetOpen}) {
 
     const onSubmit=async (data)=>{
          let URL=null
+         //find the url
 
         if(isRegister){
             if(accountType==="seeker"){
@@ -38,6 +39,7 @@ function SignUp({open,SetOpen}) {
           }
          }
 
+         //api call
       try {
         const res= await apiRequest({url :URL,data:data,method:"POST"})
         
@@ -100,8 +102,8 @@ function SignUp({open,SetOpen}) {
                     <button
                       className={`flex-1 px-4 py-2 rounded text-sm outline-none ${
                         accountType === "seeker"
-                          ? "bg-[#1d4fd862] text-blue-900 font-semibold"
-                          : "bg-white border border-blue-400"
+                          ? "bg-[#474444] text-black-900 font-semibold"
+                          : "bg-white border border-black"
                       }`}
                       onClick={() => setAccountType("seeker")}
                     >
@@ -110,8 +112,8 @@ function SignUp({open,SetOpen}) {
                     <button
                       className={`flex-1 px-4 py-2 rounded text-sm outline-none ${
                         accountType !== "seeker"
-                          ? "bg-[#1d4fd862] text-blue-900 font-semibold"
-                          : "bg-white border border-blue-400"
+                          ? "bg-[#474444] text-black-900 font-semibold"
+                          : "bg-white border border-black"
                       }`}
                       onClick={() => setAccountType("company")}
                     >
@@ -218,7 +220,7 @@ function SignUp({open,SetOpen}) {
                             label='Confirm Password'
                             placeholder='Password'
                             type='password'
-                            register={register("cPassword", {
+                            register={register("Password", {
                               validate: (value) => {
                                 const { password } = getValues();
 
@@ -250,7 +252,7 @@ function SignUp({open,SetOpen}) {
                     <div className='mt-2'>
                       <CustomButton
                         type='submit'
-                        containerStyles={`inline-flex justify-center rounded-md bg-blue-600 px-8 py-2 text-sm font-medium text-white outline-none hover:bg-blue-800`}
+                        containerStyles={`inline-flex justify-center rounded-md bg-black px-8 py-2 text-sm font-medium text-white outline-none hover:bg-[#474444]`}
                         title={isRegister ? "Create Account" : "Login Account"}
                       />
                     </div>
@@ -260,10 +262,10 @@ function SignUp({open,SetOpen}) {
                     <p className='text-sm text-gray-700'>
                       {isRegister
                         ? "Already has an account?"
-                        : "Do not have an account"}
+                        : "Do not have an account ?"}
 
                       <span
-                        className='text-sm text-blue-600 ml-2 hover:text-blue-700 hover:font-semibold cursor-pointer'
+                        className='text-sm text-black ml-2 hover:text-black-700 hover:font-semibold cursor-pointer'
                         onClick={() => setIsRegister((prev) => !prev)}
                       >
                         {isRegister ? "Login" : "Create Account"}
@@ -281,6 +283,7 @@ function SignUp({open,SetOpen}) {
       </Transition>
       </>
   )
+
 }
 
 export default SignUp

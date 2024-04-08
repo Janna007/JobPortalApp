@@ -109,11 +109,11 @@ function Navbar() {
     setIsOpen((prev)=>!prev)
   }
   return (
-    <div className='relative bg-[#f7fdfd] z-50'>
+    <div className='relative bg-[#eef1f1] z-50'>
       <nav className='container mx-auto flex items-center justify-between py-5'>
           <div>
-            <Link to='/'  className='text-blue-600  font-bold  text-xl'>
-              TERILLA<span className='text-[#1677cccb]'>:jobconnect</span>
+            <Link to='/'  className='text-black  font-bold  text-xl'>
+              TERILLA<span className='text-[#474444]'>:Your Gateway to Career Opportunities</span>
              </Link>
           </div>
           <ul className='hidden lg:flex gap-10 text-base'>
@@ -143,7 +143,7 @@ function Navbar() {
                 <Link to='/user-auth'>
                   <CustomButton title='SignIn'
                   
-                  containerStyles='text-blue-600 border border-blue-600 rounded-full py-1.5 px-5 text-base   hover:bg-blue-700 hover:text-white  focus:outline-none'  />
+                  containerStyles='text-black-600 border border-black rounded-full py-1.5 px-5 text-base   hover:bg-black-700 hover:text-white  focus:outline-none'  />
                 </Link>
               ):(
                 <div>
@@ -158,6 +158,7 @@ function Navbar() {
           >
             {isOpen ? <AiOutlineClose size={26} /> : <HiMenuAlt3 size={26} />}
           </button>
+          
       </nav>
 
        {/* MOBILE MENU */}

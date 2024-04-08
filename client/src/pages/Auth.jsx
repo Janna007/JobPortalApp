@@ -13,11 +13,11 @@ function Auth() {
   if(user?.token){
     return window.location.replace(from)
   }
-
+  
   return (
    
      <div className='w-full '>
-      <img src={Office} alt='Office' className='object-contain ' />
+      <img src="https://images.pexels.com/photos/3760072/pexels-photo-3760072.jpeg" alt='Office' className='object-contain ' />
 
        <SignUp  open={open} setOpen={setOpen}/>
     </div>
