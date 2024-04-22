@@ -9,7 +9,7 @@ import CustomButton from './CustomButton';
 function Footer() {
   return (
     <footer className='text-white mp-20'>
-      <div  className='overflow-x-hidden -mb-0.5'>
+      {/* <div  className='overflow-x-hidden -mb-0.5'>
       <svg
           preserveAspectRatio='none'
           viewBox='0 0 1200 120'
@@ -23,9 +23,9 @@ function Footer() {
         >
           <path d='M321.39 56.44c58-10.79 114.16-30.13 172-41.86 82.39-16.72 168.19-17.73 250.45-.39C823.78 31 906.67 72 985.66 92.83c70.05 18.48 146.53 26.09 214.34 3V0H0v27.35a600.21 600.21 0 00321.39 29.09z' />
         </svg>
-      </div>
+      </div> */}
 
-      <div className='bg-[#1d4ed8] '>
+      <div className='bg-[#3c3c3c] '>
           <div className='container px-5 py-20 mx-auto'>
              <div className='w-full flex flex-wrap gap-10 justify-between -mb-10 -px-4'>
                   {footerLinks.map(({id,title,links})=>(
@@ -54,7 +54,7 @@ function Footer() {
               />
               <CustomButton
                title="Subscribe"
-               containerStyles={"block  bg-[#001a36]  px-5 py-2.5 text-md rounded hover:bg-blue-800 hover:text-black focus:potline-none flex-col items-center mt-2"}
+               containerStyles={"block  bg-[#001a36]  px-5 py-2.5 text-md rounded hover:bg-white hover:text-black focus:potline-none flex-col items-center mt-2"}
 
               />
 
@@ -78,9 +78,9 @@ function Footer() {
 
           </div>
       </div>
-      <div className='bg-[#001a36]'>
+      <div className='bg-white'>
           <div className='container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row'>
-            <p className='text-gray-300 text-sm text-center sm:text-left'>
+            <p className='text-black text-sm text-center sm:text-left'>
               &copy; 2024 TERILLA —
               <a
                 href='/'
@@ -92,7 +92,7 @@ function Footer() {
               </a>
             </p>
 
-            <span className='sm:ml-auto sm:mt-0 mt-2 sm:w-auto w-full sm:text-left text-center text-gray-300 text-sm'>
+            <span className='sm:ml-auto sm:mt-0 mt-2 sm:w-auto w-full sm:text-left text-center text-black text-sm'>
               Designed by jannakondeth
             </span>
           </div>

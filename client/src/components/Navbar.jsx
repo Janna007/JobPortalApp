@@ -25,7 +25,7 @@ function MenuList({user,onClick}){
             <Menu.Button  className='inline-flex gap-2 w-full rounded-md bg-white md:px-4 py-2 text-sm font-medium text-slate-700 hover:bg-opacity-20 '>
               <div className='leading[80px] flex flex-col items-start'>
                <p className='text-sm font-semibold'>   {user?.firstName ?? user?.name }</p>
-               <span className='text-sm text-blue-600'>{user?.jobTitle  ?? user?.email}</span>
+               <span className='text-sm text-black'>{user?.jobTitle  ?? user?.email}</span>
               </div>
 
               <img  src={user?.profileUrl || NoProfile}  alt='Profile' 
@@ -56,7 +56,7 @@ function MenuList({user,onClick}){
                       user?.accountType ? "user-profile" : "company-profile"
                     }`}
                     className={`${
-                      active ? "bg-blue-500 text-white" : "text-gray-900"
+                      active ? "bg-black text-white" : "text-gray-900"
                     } group flex w-full items-center rounded-md p-2 text-sm`}
                     onClick={onClick}
                   >
@@ -75,7 +75,7 @@ function MenuList({user,onClick}){
                   <button
                     onClick={() => handleLogout()}
                     className={`${
-                      active ? "bg-blue-500 text-white" : "text-gray-900"
+                      active ? "bg-black text-white" : "text-gray-900"
                     } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                   >
                     <AiOutlineLogout

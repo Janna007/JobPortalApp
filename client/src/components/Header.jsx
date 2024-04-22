@@ -105,9 +105,9 @@ function Header({
           )}
             </div>
 
-            <div className='w-1/3 h-full absolute top-24 md:-top-6 lg:-top-14 right-16 2xl:right-[18rem]'>
+            {/* <div className='w-1/3 h-full absolute top-24 md:-top-6 lg:-top-14 right-16 2xl:right-[18rem]'>
           <img src='https://images.pexels.com/photos/5668857/pexels-photo-5668857.jpeg?auto=compress&cs=tinysrgb&w=600' className='object-contain rounded-full'  />
-        </div>
+        </div> */}
        
         </div>
         
