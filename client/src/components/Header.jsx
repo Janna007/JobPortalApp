@@ -23,7 +23,7 @@ const SearchInput=({
 
    return(
     <div className={`flex w-full md:w-1/3 items-center ${styles}`}> 
-      {icon}
+     {icon}
 
       <input
          value={value}
@@ -83,7 +83,7 @@ function Header({
                     <div>
                         < CustomButton
                            title='Search'
-                           containerStyles={  "text-white py-2 md:py3 px-3 md:px-10 focus:outline-none bg-blue-600 rounded-full md:rounded-md text-sm md:text-base"}
+                           containerStyles={  "text-white py-2 md:py3 px-3 md:px-10 focus:outline-none bg-black rounded-full md:rounded-md text-sm md:text-base"}
                           onClick={handleClick}
                          />
                     </div>
@@ -96,7 +96,7 @@ function Header({
               {popularSearch.map((search, index) => (
                 <span
                   key={index}
-                  className='bg-[#1d4fd826] text-[#1d4ed8] py-1 px-2 rounded-full text-sm md:text-base'
+                  className='bg-[#787878] text-[#3c3c3c] py-1 px-2 rounded-full text-sm md:text-base'
                 >
                   {search}
                 </span>

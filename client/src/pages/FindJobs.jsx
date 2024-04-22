@@ -146,8 +146,8 @@ const handleClick=async (e)=>{
                <input
                type='checkbox'
                value={jtype}
-               className='w-4 h-4'
-               onChange={(e)=>{filterJobs(e.target.value)}}
+               className='w-4 h-4 checked:bg-black'
+               onChange={(e)=>{filterJobs(e.target.value)}} 
                />
                  <span>{jtype}</span>
             </div>
@@ -215,7 +215,7 @@ const handleClick=async (e)=>{
               <CustomButton
                onClick={handlleShowMore}
                 title='Load More'
-                containerStyles={`text-blue-600 py-1.5 px-5 focus:outline-none hover:bg-blue-700 hover:text-white rounded-full text-base border border-blue-600`}
+                containerStyles={`text-black py-1.5 px-5 focus:outline-none hover:bg-black hover:text-white rounded-full text-base border border-black`}
               />
             </div>
           )}
