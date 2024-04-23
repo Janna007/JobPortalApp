@@ -1,6 +1,6 @@
 import { Outlet, Navigate,Route,Routes,useLocation } from "react-router-dom"
 import { Footer, Navbar } from "./components"
-import { About, Auth, Companies, CompanyProfile, FindJobs, JobDetail, UploadJob, UserProfile } from "./pages";
+import { About, ApplyJobs, Auth, Companies, CompanyProfile, FindJobs, JobDetail, UploadJob, UserProfile } from "./pages";
 import { useSelector } from "react-redux";
 
 
@@ -40,6 +40,7 @@ function App() {
           <Route path={"/company-profile/:id"} element={<CompanyProfile />} />
           <Route path={"/upload-job"} element={<UploadJob />} />
           <Route path={"/job-detail/:id"} element={<JobDetail />} />
+          <Route path={"/apply-jobs"}  element={<ApplyJobs/>}  />
        </Route>
 
        <Route path="/about-us"  element={<About/>} />

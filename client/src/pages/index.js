@@ -6,6 +6,7 @@ import Companies from "./Companies";
 import CompanyProfile from "./CompanyProfile";
 import About from "./About";
 import Auth from "./Auth";
+import ApplyJobs from "./ApplyJobs"
 
 export{
     FindJobs,
@@ -16,4 +17,5 @@ export{
     CompanyProfile,
     About,
     Auth,
+    ApplyJobs
 }

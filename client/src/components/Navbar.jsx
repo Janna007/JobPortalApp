@@ -128,7 +128,7 @@ function Navbar() {
               <Link to='/upload-job'>UPLOAD JOB</Link>
             </li>
             :  <li>
-            <Link to='/upload-job'>APPLY JOB</Link>
+            <Link to='/apply-jobs'>APPLY JOBS</Link>
           </li>
           
              }
