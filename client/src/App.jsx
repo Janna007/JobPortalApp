@@ -2,6 +2,7 @@ import { Outlet, Navigate,Route,Routes,useLocation } from "react-router-dom"
 import { Footer, Navbar } from "./components"
 import { About, ApplyJobs, Auth, Companies, CompanyProfile, FindJobs, JobDetail, UploadJob, UserProfile } from "./pages";
 import { useSelector } from "react-redux";
+import ApplyFrom from "./pages/ApplyFrom";
 
 
 
@@ -41,6 +42,7 @@ function App() {
           <Route path={"/upload-job"} element={<UploadJob />} />
           <Route path={"/job-detail/:id"} element={<JobDetail />} />
           <Route path={"/apply-jobs"}  element={<ApplyJobs/>}  />
+          <Route  path={"/apply-form"}  element={<ApplyFrom/>}  />
        </Route>
 
        <Route path="/about-us"  element={<About/>} />
