@@ -9,7 +9,7 @@ function JobCard({job}) {
         <Link to={`/job-detail/${job?._id}`}>
 
         <div
-        className='w-full md:w-[16rem] 2xl:w-[18rem] h-[16rem] md:h-[18rem] bg-white flex flex-col justify-between shadow-lg 
+        className='w-full md:w-[16rem] 2xl:w-[18rem] h-[16rem] md:h-[18rem] bg-[#eef1f1] flex flex-col justify-between shadow-lg border border-black
                 rounded-md px-3 py-5 '
       >
         <div className='w-full flex flex-col h-full justify-between'>
@@ -35,7 +35,7 @@ function JobCard({job}) {
           </p>
         </div>
         <div className='flex items-center justify-between'>
-          <p className='bg-[#1d4fd826] text-[#3c3c3c] py-0.5 px-1.5 rounded font-semibold text-sm'>
+          <p className='bg-[#787878] text-black py-0.5 px-1.5 rounded font-semibold text-sm'>
             {job?.jobType}
           </p>
           <span className='text-gray-500 text-sm'>

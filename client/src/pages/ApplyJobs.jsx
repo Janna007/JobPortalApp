@@ -49,7 +49,7 @@ function ApplyJobs() {
 
 
   return (
-    <div className='container mx-auto px-10'>
+    <div className='container mx-auto px-10 pt-10'>
           <div  className='w-full flex flex-wrap gap-4'>
               {data?.map((job,index)=>{
                   const data={
