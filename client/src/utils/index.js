@@ -51,7 +51,7 @@ export const updateURL=({
       navigate,
       location,
       jType,
-      exp
+      exp 
 })=>{ 
     const params=new URLSearchParams()
     if(pageNum && pageNum>1){
@@ -76,14 +76,12 @@ export const updateURL=({
         params.set("exp",exp)
     }
 
+    
     const newURL=`${location.pathname}?${params.toString()}`;
+    console.log(newURL)
     navigate(newURL,{replace:true})
 
     return newURL
-
-
-
-
 } 
 
  
