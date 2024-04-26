@@ -299,3 +299,28 @@ export const deleteJobPost =async(req,res,next)=>{
         res.status(404).json({ message: error.message });
       }
 }
+
+export const applyJob=async(req,res,next)=>{
+  try {
+    const {id}=req.params
+
+    const applied=await Jobs.findByIdAndUpdate(id,{
+      $push:{
+        application:req.body.user.userId
+      }
+    },{new:true})
+
+    if(!applied){
+      res.status(500).send("Something went wrong")
+    }
+     res.status(200).send({
+      success:true,
+      messege:"Applied for job successfully"
+     })
+
+    
+  } catch (error) {
+    console.log(error)
+    res.status(404).json({ message: error.message });
+  }
+}
