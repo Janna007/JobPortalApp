@@ -8,8 +8,10 @@ import { apiRequest } from '../utils';
 import { useSelector } from 'react-redux';
 import { __DO_NOT_USE__ActionTypes } from '@reduxjs/toolkit';
 import { BsDatabaseDash } from 'react-icons/bs';
+import { useParams } from 'react-router-dom';
 
 function ApplyFrom() {
+    const {id}=useParams()
     const {user}=useSelector((state)=>state.user)
     const {
       register,
@@ -23,10 +25,58 @@ function ApplyFrom() {
     });
   
     const [errMsg, setErrMsg] = useState("");
+    const [isLoading,setIsLoading]=useState(false)
+    const [recentApply,setRecentApply]=useState([])
 
-    const onSubmit=()=>{
+    const onSubmit=async (data)=>{
+      console.log("Clicked")
+      setIsLoading(true)
+      setErrMsg(null)
+      try {
 
+        const res=await apiRequest({
+          url:"/jobs/apply-job/"+id,
+          method:"POST",
+          token:user?.token,
+          data
+        })
+        
+        console.log(res)
+        if(res.status==="failed"){
+          setErrMsg({...res})
+        }else{
+          setErrMsg({status:"success",messege:res.messege})
+          setTimeout(()=>{
+            window.location.reload()
+          },2000)
+        }
+        setIsLoading(false)
+      } catch (error) {
+        console.log(error)
+        setIsLoading(false)
+      }
     }
+
+
+    const getRecentApplied=async()=>{
+        try {
+           const res=await apiRequest({
+            url:"jobs/get-applied-jobs",
+            method:"GET",
+            token:user?.token
+           })
+           console.log(res)
+           setRecentApply(res?.data)
+        } catch (error) {
+          console.log(error)
+        }
+    }
+
+    useEffect(()=>{
+      getRecentApplied()
+    },[])
+
+
   return (
     <div>
         <div className='container mx-auto flex flex-col md:flex-row gap-8 2xl:gap-14 bg-[#f7fdfd] px-5'>
@@ -111,20 +161,6 @@ function ApplyFrom() {
               <label className='text-gray-600 text-sm mb-1'>
                 Resume
               </label>
-              {/* <textarea
-                className='rounded border border-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-base px-4 py-2 resize-none'
-                rows={4}
-                cols={6}
-                {...register("desc", {
-                  required: "Job Description is required!",
-                })}
-                aria-invalid={errors.desc ? "true" : "false"}
-              ></textarea>
-              {errors.desc && (
-                <span role='alert' className='text-xs text-red-500 mt-0.5'>
-                  {errors.desc?.message}
-                </span>
-              )} */}
                <TextInput
                   name='resume'
                   label='Upload your resume'
@@ -139,23 +175,6 @@ function ApplyFrom() {
 
             </div>
 
-            {/* <div className='flex flex-col'>
-              <label className='text-gray-600 text-sm mb-1'>
-               Requirements
-              </label>
-              <textarea
-                className='rounded border border-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-base px-4 py-2 resize-none'
-                rows={4}
-                cols={6}
-                {...register("requirements")}
-              ></textarea>
-            </div> */}
-
-            {/* {errMsg && (
-              <span role='alert' className='text-sm text-red-500 mt-0.5'>
-                {errMsg}
-              </span>
-            )} */}
             <div className='mt-2'>
               <CustomButton
                 type='submit'
@@ -170,10 +189,12 @@ function ApplyFrom() {
  </div>
 
  <div className='w-full md:w-1/3 2xl:2/4 p-5 mt-20 md:mt-0'>
-        <p className='text-gray-500 font-semibold'>Applied Jobs</p>
-
-        {/* <div className='w-full flex flex-wrap gap-6'>
-          {recentPost?.slice(0, 4).map((job, index) => {
+        <p className='text-gray-500 font-semibold'>Recent Applied Jobs</p>
+        {recentApply.length ===0 ? (
+             <p>No applied jobs </p>
+        ):(
+        <div className='w-full flex flex-wrap gap-6'>
+          {recentApply?.slice(0, 4).map((job, index) => {
             const data={
               name:user?.name,
               email:user?.email,
@@ -183,7 +204,8 @@ function ApplyFrom() {
             
             return <JobCard job={data} key={index} />;
           })}
-        </div> */}
+        </div>
+        )}
       </div>
 
     </div>

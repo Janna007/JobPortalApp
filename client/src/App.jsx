@@ -42,7 +42,7 @@ function App() {
           <Route path={"/upload-job"} element={<UploadJob />} />
           <Route path={"/job-detail/:id"} element={<JobDetail />} />
           <Route path={"/apply-jobs"}  element={<ApplyJobs/>}  />
-          <Route  path={"/apply-form"}  element={<ApplyFrom/>}  />
+          <Route  path={"/apply-form/:id"}  element={<ApplyFrom/>}  />
        </Route>
 
        <Route path="/about-us"  element={<About/>} />

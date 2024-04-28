@@ -1,5 +1,5 @@
 import express from "express";
-import { applyJob, createJob, deleteJobPost, getJobById, getJobPosts, updateJob } from "../controllers/jobController.js";
+import { applyJob, createJob, deleteJobPost, getJobById, getJobPosts, recentAppliedJobs, updateJob } from "../controllers/jobController.js";
 import userAuth from '../middlewares/authMiddleware.js'
 
 const router = express.Router();
@@ -21,6 +21,8 @@ router.delete("/delete-job/:id", userAuth, deleteJobPost);
 
 router.post("/apply-job/:id",userAuth,applyJob)
 
+//Get Recent applied
 
+router.get("/get-applied-jobs",userAuth,recentAppliedJobs)
 
 export default router;

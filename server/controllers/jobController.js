@@ -323,4 +323,30 @@ export const applyJob=async(req,res,next)=>{
     console.log(error)
     res.status(404).json({ message: error.message });
   }
+}  
+
+export const recentAppliedJobs=async(req,res,next)=>{
+      const id=req.body.user.userId
+     try {
+        const appliedJobs=await Jobs.find({'application': id})
+
+        if(!appliedJobs){
+          res.status(200).send({success:true,message:"No Applied Jobs"})
+        }
+
+        res.status(200).send({
+          success:true,
+          message:"fetch jobs successfully",
+          data:appliedJobs
+        })
+        
+    } catch (error) {
+       console.log(error)
+       res.status(504).json({message :error.message})
+    }
+
+     
+      
+
+
 }

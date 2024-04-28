@@ -192,7 +192,7 @@ function JobDetail() {
           </div>
       
           <div className='w-full'>
-            <Link to={"/apply-form"}>
+            <Link to={`/apply-form/${id}`}>
            {user?._id !== job?.company?._id ?
             <CustomButton
               title='Apply Now'
