@@ -3,6 +3,9 @@ import { Footer, Navbar } from "./components"
 import { About, ApplyJobs, Auth, Companies, CompanyProfile, FindJobs, JobDetail, UploadJob, UserProfile } from "./pages";
 import { useSelector } from "react-redux";
 import ApplyFrom from "./pages/ApplyFrom";
+import AdminPanel from "./pages/AdminPanel";
+import UserList from "./pages/UserList";
+import CompanyList from "./pages/CompanyList";
 
 
 
@@ -31,7 +34,13 @@ function App() {
       <Navbar />
       <Routes>
        <Route element={<Layout/>}>
-        <Route  path="/" element={<Navigate to='/find-jobs'  replace={true} />} />
+       <Route 
+  path="/" 
+  element={
+    user?.admin ? <Navigate to="/adminpanel" replace={true} /> : <Navigate to='/find-jobs' replace={true} />
+  }
+/>
+
         <Route  path="/find-jobs"  element={<FindJobs />} />
         <Route  path="/companies"  element={<Companies />} />
         <Route  path= {user?.accountType==="seeker" ?"/user-profile" :"user-profile/:id"}
@@ -47,6 +56,10 @@ function App() {
 
        <Route path="/about-us"  element={<About/>} />
        <Route path="/user-auth"  element={<Auth />}/>
+       <Route path="/adminpanel"  element={<AdminPanel/>}/>
+       <Route path="/userslist"  element={<UserList/>}/>
+       {/* <Route path="/companylist"  element={<CompanyList/>}/> */}
+       
       </Routes>
 
     { user && <Footer />}

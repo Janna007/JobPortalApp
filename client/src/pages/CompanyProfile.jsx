@@ -56,9 +56,9 @@ const CompnayForm = ({ open, setOpen }) => {
         dispatch(Login(newData))
         localStorage.setItem("userInfo",JSON.stringify(data))
 
-        setTimeout(()=>{
-          window.location.reload()
-        },1500)
+        // setTimeout(()=>{
+        //   window.location.reload()
+        // },1500)
       }
     } catch (error) {
       console.log(error)

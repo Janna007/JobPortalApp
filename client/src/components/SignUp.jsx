@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from 'react'
 import { Dialog ,Transition} from '@headlessui/react'
 import { useForm } from "react-hook-form"
-import { useLocation } from 'react-router-dom'
+import {  useLocation, useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import TextInput from './TextInput'
 import CustomButton from './CustomButton'
@@ -11,12 +11,13 @@ import { apiRequest } from '../utils'
 function SignUp({open,SetOpen}) {
     const dispatch=useDispatch()
     const location=useLocation()
+    const navigate=useNavigate()
     const { register, handleSubmit,getValues,watch,formState:{errors} } = useForm()
     const [isRegister,setIsRegister]=useState(false)
     const [accountType,setAccountType]=useState("seeker")
     const [errMsg,setErrMsg]=useState("")
 
-    let from =location.state?.from?.pathname || "/"
+    // let from =location.state?.from?.pathname || "/"
 
     const closeModal=()=> SetOpen(false)
 
@@ -42,17 +43,24 @@ function SignUp({open,SetOpen}) {
          //api call
       try {
         const res= await apiRequest({url :URL,data:data,method:"POST"})
+        console.log(res)
         
         if(res?.status==="failed"){
           setErrMsg(res?.message)
         }else{
           setErrMsg("")
          const data={token:res?.token,...res?.user}
+         
         
-         dispatch(Login(data))
+          dispatch(Login(data))
          
           localStorage.setItem("userInfo",JSON.stringify(data))
-          window.location.replace(from)
+        
+            navigate("/adminpanel")
+          
+        
+         
+         
       }
       } catch (error) {
         console.log(error)

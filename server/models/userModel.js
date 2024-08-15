@@ -42,6 +42,10 @@ const userSchema=new Schema({
     },
     about:{
         type:String
+    },
+    admin:{
+        type:Boolean,
+        default:false
     }
 },{timestamps:true})
 

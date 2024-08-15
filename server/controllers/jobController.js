@@ -1,6 +1,7 @@
 import { isValidObjectId } from "mongoose";
 import { Jobs } from "../models/jobsModel.js";
 import { Companies } from "../models/companiesModel.js";
+import { sendMail } from "../services/mailer.js";
 
 export const createJob =async(req,res,next)=>{
     try {
@@ -313,6 +314,12 @@ export const applyJob=async(req,res,next)=>{
     if(!applied){
       res.status(500).send("Something went wrong")
     }
+   await sendMail(
+    'innujaan5@gmail.com',
+    "Your Application",
+    "Your application for job send successfully"
+   )
+
      res.status(200).send({
       success:true,
       messege:"Applied for job successfully"

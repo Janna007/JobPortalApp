@@ -50,7 +50,7 @@ const UserForm = ({ open, setOpen }) => {
             dispatch(Login(newData))
             localStorage.setItem("userInfo",JSON.stringify(data))
 
-            window.location.reload()
+            // window.location.reload()
         }
 
           

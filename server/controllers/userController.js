@@ -35,7 +35,8 @@ export const userUpdateProfile=async(req,res,next)=>{
                   jobTitle,
                   about,
                   profileUrl,
-                  location
+                  location,
+                  
               }},
               {new:true}
             )
