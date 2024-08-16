@@ -9,6 +9,7 @@ import { CustomButton, TextInput } from "../components";
 import { NoProfile } from "../assets";
 import { apiRequest, handleFileUpload } from "../utils";
 import { Login } from "../redux/userSlice";
+import { useNavigate } from "react-router-dom";
 
 const UserForm = ({ open, setOpen }) => {
   const { user } = useSelector((state) => state.user);
@@ -239,6 +240,7 @@ const UserProfile = () => {
   const { user } = useSelector((state) => state.user);
   const [open, setOpen] = useState(false);
   const userInfo = user;
+  const navigate=useNavigate()
 
   return (
     <div className='container mx-auto flex items-center justify-center py-10'>
@@ -291,9 +293,9 @@ const UserProfile = () => {
             </div>
         
           </div>
-          {/* <div>
-              <button className='w-full md:w-64 bg-blue-600 text-white mt-4 py-2 rounded'>GET premium</button>
-            </div> */}
+          <div>
+              <button className='w-full md:w-64 bg-blue-600 text-white mt-4 py-2 rounded' onClick={()=>{navigate('/plans')}}>GET premium</button>
+            </div>
         </div>
         
       </div>

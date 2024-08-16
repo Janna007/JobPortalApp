@@ -6,6 +6,8 @@ import ApplyFrom from "./pages/ApplyFrom";
 import AdminPanel from "./pages/AdminPanel";
 import UserList from "./pages/UserList";
 import CompanyList from "./pages/CompanyList";
+import Payment from "./pages/Payment";
+import PayDetails from './pages/PayDetails'
 
 
 
@@ -58,7 +60,9 @@ function App() {
        <Route path="/user-auth"  element={<Auth />}/>
        <Route path="/adminpanel"  element={<AdminPanel/>}/>
        <Route path="/userslist"  element={<UserList/>}/>
-       {/* <Route path="/companylist"  element={<CompanyList/>}/> */}
+       <Route path="/companylist"  element={<CompanyList/>}/>
+       <Route  path="/plans"  element={<Payment/>}/>
+       <Route  path="/payment"  element={<PayDetails/>}/>
        
       </Routes>
 
